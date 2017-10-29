@@ -60,14 +60,14 @@ curl -sSL https://goo.gl/LQkuoh | bash
 #docker-compose-cli.yamlのscriptを実行するコマンドをコメント
 vim docker-compose-cli.yaml
 woring_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
-# command: /bin/bash -C './scripts/script.sh ${CHANNEL_NAME}; sleep $tIMEOUT'
+#command: /bin/bash -C './scripts/script.sh ${CHANNEL_NAME}; sleep $tIMEOUT'
 volumes
 
 #networkを開始
 CHANNEL_NAME=<channel ID> TIMEOUT=60 docker-compose -f docker-compose-cli.yaml up -d
 
 #環境の違いによる設定変更をまとめておく
-# Environment variables for PEER0
+#Environment variables for PEER0
 CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
 CORE_PEER_ADDRESS=peer0.org1.example.com:7051
 CORE_PEER_LOCALMSPID="Org1MSP"
@@ -88,8 +88,8 @@ peer channel join -b <channel ID>
 peer chaincode install -n mycc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
 
 #初期化
-# be sure to replace the $CHANNEL_NAME environment variable
-# if you did not install your chaincode with a name of mycc, then modify that argument as well
+#be sure to replace the $CHANNEL_NAME environment variable
+#if you did not install your chaincode with a name of mycc, then modify that argument as well
 peer chaincode instantiate -o orderer.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/cacerts/ca.example.com-cert.pem -C $CHANNEL_NAME -n mycc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 -c '{"Args":["init","a", "100", "b","200"]}' -P "OR ('Org1MSP.member','Org2MSP.member’)"
 
 #Query
